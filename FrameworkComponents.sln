@@ -7,7 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E6D1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Hosting.Domain", "Ahedfi.Component.Hosting.Domain\Ahedfi.Component.Hosting.Domain.csproj", "{0AD3DA17-983C-4515-861D-0977246BE70B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Hosting.Domain", "Ahedfi.Component.Hosting.Domain\Ahedfi.Component.Hosting.Domain.csproj", "{0AD3DA17-983C-4515-861D-0977246BE70B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Builder", "Builder", "{EB245CCE-92C4-4ACB-B43D-AF9530D97EBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Builder.Domain", "Ahedfi.Component.Builder.Domain\Ahedfi.Component.Builder.Domain.csproj", "{A7074BA3-37D7-4D3B-9751-5E581AD99EB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,10 @@ Global
 		{0AD3DA17-983C-4515-861D-0977246BE70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AD3DA17-983C-4515-861D-0977246BE70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AD3DA17-983C-4515-861D-0977246BE70B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7074BA3-37D7-4D3B-9751-5E581AD99EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7074BA3-37D7-4D3B-9751-5E581AD99EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7074BA3-37D7-4D3B-9751-5E581AD99EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7074BA3-37D7-4D3B-9751-5E581AD99EB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,6 +34,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
 		{0AD3DA17-983C-4515-861D-0977246BE70B} = {AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}
+		{EB245CCE-92C4-4ACB-B43D-AF9530D97EBA} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
+		{A7074BA3-37D7-4D3B-9751-5E581AD99EB8} = {EB245CCE-92C4-4ACB-B43D-AF9530D97EBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {513853A6-E410-45B4-9E0E-C701D24889BA}
