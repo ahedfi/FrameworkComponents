@@ -7,13 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E6D1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{91D60B6B-FF39-425A-B7B7-C1D1DC10C80E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D16ADA6C-529D-4BF0-B320-9622472EAF87}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Hosting.Domain.Service", "Ahedfi.Component.Hosting.Domain.Service\Ahedfi.Component.Hosting.Domain.Service.csproj", "{E99CE384-AA58-404D-B93B-D4DFE0745165}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Hosting.Domain.Interface", "Ahedfi.Component.Hosting.Domain.Interface\Ahedfi.Component.Hosting.Domain.Interface.csproj", "{FAE6A599-2354-4CF2-B42B-1FABD7C0560B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Hosting.Domain", "Ahedfi.Component.Hosting.Domain\Ahedfi.Component.Hosting.Domain.csproj", "{0AD3DA17-983C-4515-861D-0977246BE70B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,24 +15,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E99CE384-AA58-404D-B93B-D4DFE0745165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E99CE384-AA58-404D-B93B-D4DFE0745165}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E99CE384-AA58-404D-B93B-D4DFE0745165}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E99CE384-AA58-404D-B93B-D4DFE0745165}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAE6A599-2354-4CF2-B42B-1FABD7C0560B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAE6A599-2354-4CF2-B42B-1FABD7C0560B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAE6A599-2354-4CF2-B42B-1FABD7C0560B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAE6A599-2354-4CF2-B42B-1FABD7C0560B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD3DA17-983C-4515-861D-0977246BE70B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD3DA17-983C-4515-861D-0977246BE70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD3DA17-983C-4515-861D-0977246BE70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD3DA17-983C-4515-861D-0977246BE70B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
-		{91D60B6B-FF39-425A-B7B7-C1D1DC10C80E} = {AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}
-		{D16ADA6C-529D-4BF0-B320-9622472EAF87} = {AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}
-		{E99CE384-AA58-404D-B93B-D4DFE0745165} = {91D60B6B-FF39-425A-B7B7-C1D1DC10C80E}
-		{FAE6A599-2354-4CF2-B42B-1FABD7C0560B} = {91D60B6B-FF39-425A-B7B7-C1D1DC10C80E}
+		{0AD3DA17-983C-4515-861D-0977246BE70B} = {AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {513853A6-E410-45B4-9E0E-C701D24889BA}
