@@ -11,11 +11,13 @@ namespace Ahedfi.Component.Builder.Domain.Services
 {
     public class BaseStartup
     {
+        public IConfiguration Configuration { get; }
+
         public BaseStartup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public IConfiguration Configuration { get; }
+
         public virtual void ConfigureServices(IServiceCollection services)
         {
             var baseModule = typeof(IBaseModule);
@@ -39,15 +41,15 @@ namespace Ahedfi.Component.Builder.Domain.Services
             }
             catch (ArgumentNullException)
             {
-                throw new ComponentBuilderExcetpion("module assemblies should not be null");
+                throw new BuilderExcetpion("module assemblies should not be null");
             }
             catch (InvalidOperationException)
             {
-                throw new ComponentBuilderExcetpion("module assemblies contains more than one core module");
+                throw new BuilderExcetpion("module assemblies contains more than one core module");
             }
             catch (Exception e)
             {
-                throw new ComponentBuilderExcetpion(e.Message);
+                throw new BuilderExcetpion(e.Message);
             }
         }
         private IEnumerable<Type> GetModulesExceptCoreModule(Type type, Type coreModule)

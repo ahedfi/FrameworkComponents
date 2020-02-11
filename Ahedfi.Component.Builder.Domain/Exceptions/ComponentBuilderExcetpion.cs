@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Ahedfi.Component.Builder.Domain.Exceptions
 {
-    public class ComponentBuilderExcetpion : Exception
+    public class BuilderExcetpion : Exception
     {
-        public ComponentBuilderExcetpion(string message) : base(message)
+        public BuilderExcetpion(string message) : base(message)
         {
         }
     }
