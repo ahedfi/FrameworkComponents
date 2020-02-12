@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ahedfi.Component.Hosting.Domain.Interfaces
 {
@@ -6,6 +7,6 @@ namespace Ahedfi.Component.Hosting.Domain.Interfaces
     {
         int Order { get; }
 
-        void RegisterTypes(IServiceCollection container);
+        void RegisterTypes(IConfiguration configuration, IServiceCollection container);
     }
 }

@@ -66,10 +66,10 @@ namespace Ahedfi.Component.Builder.Domain.Services
                 Assembly.Load(item);
             }
         }
-        private void RegisterModule(IServiceCollection services, Type item)
+        private void RegisterModule(IServiceCollection services, Type module)
         {
-            IBaseModule instance = (IBaseModule)Activator.CreateInstance(item);
-            instance.RegisterTypes(services);
+            IBaseModule instance = (IBaseModule)Activator.CreateInstance(module);
+            instance.RegisterTypes(Configuration, services);
         }
     }
 }
