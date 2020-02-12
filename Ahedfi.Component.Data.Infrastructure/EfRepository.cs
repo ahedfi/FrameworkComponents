@@ -2,67 +2,155 @@
 using Ahedfi.Component.Core.Domain.Interfaces;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ahedfi.Component.Data.Infrastructure
 {
-    public class EfRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : Entity, IAggregateRoot
+    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, IAggregateRoot
     {
-
         protected readonly DbContext _dbContext;
-
         public EfRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
+        public virtual async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,   
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+            bool disableTracking = true)
+        {
+            IQueryable<TEntity> query = _dbContext.Set<TEntity>();
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
 
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).FirstOrDefaultAsync();
+            }
+            else
+            {
+                return await query.FirstOrDefaultAsync();
+            }
+        }
+        public virtual async Task<IReadOnlyList<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, 
+            IIncludableQueryable<TEntity, object>> include = null,
+            bool disableTracking = true)
+        {
+            IQueryable<TEntity> query = _dbContext.Set<TEntity>();
+
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
+        }
         public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
-
-        public async Task<IReadOnlyList<TEntity>> ListAllAsync()
+        public virtual async Task<IReadOnlyList<TEntity>> ListAllAsync()
         {
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
-
-        public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
+        public virtual async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
         {
             return await ApplySpecification(spec).ToListAsync();
         }
-
-        public async Task<int> CountAsync(ISpecification<TEntity> spec)
+        public virtual async Task<int> CountAsync(ISpecification<TEntity> spec)
         {
             return await ApplySpecification(spec).CountAsync();
         }
-
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-
-            return entity;
         }
-
-        public async Task UpdateAsync(TEntity entity)
+        public virtual async Task AddAsync(IEnumerable<TEntity> entities)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.Set<TEntity>().AddRangeAsync(entities);
         }
-
-        public async Task DeleteAsync(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
+             _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+        public virtual void Update(IEnumerable<TEntity> entities)
+        {
+            _dbContext.Set<TEntity>().UpdateRange(entities);
+        }
+        public virtual void Delete(TEntity entity)
+        {
+            if (_dbContext.Entry(entity).State == EntityState.Detached)
+            {
+                _dbContext.Set<TEntity>().Attach(entity);
+            }
             _dbContext.Set<TEntity>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
         }
+        public virtual void Delete(object id)
+        {
+            var entityToDelete = _dbContext.Set<TEntity>().Find(id);
 
+            if (entityToDelete != null)
+            {
+                _dbContext.Set<TEntity>().Remove(entityToDelete);
+            }
+        }
+        public virtual void Delete(IEnumerable<TEntity> entities)
+        {
+            _dbContext.Set<TEntity>().RemoveRange(entities);
+        }
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
         {
             return SpecificationEvaluator<TEntity>.GetQuery(_dbContext.Set<TEntity>().AsQueryable(), spec);
+        }
+        public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return await _dbContext.Set<TEntity>().CountAsync();
+            }
+            else
+            {
+                return await _dbContext.Set<TEntity>().CountAsync(predicate);
+            }
+        }
+        public virtual async Task<bool> Exists(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbContext.Set<TEntity>().AnyAsync(predicate);
         }
     }
 }
