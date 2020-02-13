@@ -8,6 +8,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ahedfi.Component.Data.Infrastructure\Ahedfi.Component.Data.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ahedfi.Component.Services.Domain\Ahedfi.Component.Services.Domain.csproj" />
+  </ItemGroup>
   
   <PropertyGroup>
     <OutputPath>..\bin</OutputPath>

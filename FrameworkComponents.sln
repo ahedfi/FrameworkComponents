@@ -15,13 +15,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Builder.Do
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3EAE3BEA-781A-4734-9EE0-192F9926E9D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Core.Domain", "Ahedfi.Component.Core.Domain\Ahedfi.Component.Core.Domain.csproj", "{E71FA9D2-41E8-402D-B8C6-0B4D708E390D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Core.Domain", "Ahedfi.Component.Core.Domain\Ahedfi.Component.Core.Domain.csproj", "{E71FA9D2-41E8-402D-B8C6-0B4D708E390D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{8BCD671D-F2BB-4DF1-9FB5-0E53ED4A06B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Data.Domain", "Ahedfi.Component.Data.Domain\Ahedfi.Component.Data.Domain.csproj", "{59C9ACBF-33A1-4472-B2C0-71F9633586AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Data.Domain", "Ahedfi.Component.Data.Domain\Ahedfi.Component.Data.Domain.csproj", "{59C9ACBF-33A1-4472-B2C0-71F9633586AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Data.Infrastructure", "Ahedfi.Component.Data.Infrastructure\Ahedfi.Component.Data.Infrastructure.csproj", "{0C3E9F91-DCD3-4683-B989-96567AE299A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Data.Infrastructure", "Ahedfi.Component.Data.Infrastructure\Ahedfi.Component.Data.Infrastructure.csproj", "{0C3E9F91-DCD3-4683-B989-96567AE299A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Services.Domain", "Ahedfi.Component.Services.Domain\Ahedfi.Component.Services.Domain.csproj", "{9C6BE9ED-6487-4307-92F1-A4329DF12E59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{65047884-7F60-4062-B46D-B66FFAC8E677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{0C3E9F91-DCD3-4683-B989-96567AE299A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3E9F91-DCD3-4683-B989-96567AE299A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3E9F91-DCD3-4683-B989-96567AE299A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6BE9ED-6487-4307-92F1-A4329DF12E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6BE9ED-6487-4307-92F1-A4329DF12E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6BE9ED-6487-4307-92F1-A4329DF12E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6BE9ED-6487-4307-92F1-A4329DF12E59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,8 @@ Global
 		{8BCD671D-F2BB-4DF1-9FB5-0E53ED4A06B5} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
 		{59C9ACBF-33A1-4472-B2C0-71F9633586AC} = {8BCD671D-F2BB-4DF1-9FB5-0E53ED4A06B5}
 		{0C3E9F91-DCD3-4683-B989-96567AE299A4} = {8BCD671D-F2BB-4DF1-9FB5-0E53ED4A06B5}
+		{9C6BE9ED-6487-4307-92F1-A4329DF12E59} = {65047884-7F60-4062-B46D-B66FFAC8E677}
+		{65047884-7F60-4062-B46D-B66FFAC8E677} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {513853A6-E410-45B4-9E0E-C701D24889BA}

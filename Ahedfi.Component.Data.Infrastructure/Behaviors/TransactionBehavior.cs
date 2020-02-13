@@ -18,41 +18,33 @@ namespace Ahedfi.Component.Data.Infrastructure.Behaviors
         }
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
-            using (_unitOfWork)
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                try
                 {
-                    try
+                    var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
+                    var task = obj as Task;
+                    if (task != null)
                     {
-                        var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
-                        var task = obj as Task;
-                        if (task != null)
-                        {
-                            task.ContinueWith(t =>
-                            {
-                                if (t.Exception == null)
-                                {
-                                    _unitOfWork.CommitAsync().Wait();
-                                    scope.Complete();
-                                }
-                                else
-                                {
-                                    scope.Dispose();
-                                }
-                            });
-                        }
-                        else
-                        {
-                            _unitOfWork.CommitAsync().Wait();
+                        // TODO : Review asynchrounous task
+                        task.Wait();
+                        if (task.Exception != null)
+                            throw new InvalidOperationException("Invalid operation", task.Exception);
+                        else {
+                            _unitOfWork.CommitAsync().GetAwaiter().GetResult();
                             scope.Complete();
                         }
-
-                        return obj;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        throw;
+                        _unitOfWork.CommitAsync().GetAwaiter().GetResult();
+                        scope.Complete();
                     }
+                    return obj;
+                }
+                catch (Exception ex)
+                {
+                    throw;
                 }
             }
         }
