@@ -13,6 +13,12 @@
     <ProjectReference Include="..\Ahedfi.Component.Data.Infrastructure\Ahedfi.Component.Data.Infrastructure.csproj" />
     <ProjectReference Include="..\Ahedfi.Component.Services.Domain\Ahedfi.Component.Services.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NetCoreStack.DispatchProxyAsync">
+      <HintPath>..\Libs\NetCoreStack.DispatchProxyAsync.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   
   <PropertyGroup>
     <OutputPath>..\bin</OutputPath>

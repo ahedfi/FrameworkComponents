@@ -15,4 +15,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Ahedfi.Component.Data.Domain\Ahedfi.Component.Data.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NetCoreStack.DispatchProxyAsync">
+      <HintPath>..\Libs\NetCoreStack.DispatchProxyAsync.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
