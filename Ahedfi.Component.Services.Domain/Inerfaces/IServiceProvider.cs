@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Ahedfi.Component.Services.Domain.Inerfaces
 {
-    public interface IServiceProvider
+    public interface IServicesProvider
     {
+
     }
 }

@@ -8,8 +8,8 @@ namespace Ahedfi.Component.Hosting.Domain.Extensions
     public static class ModuleExtensions
     {
         public static IServiceCollection AddServiceProvider<TService, TServiceImpl, TUnitOfWork>(this IServiceCollection services)
-           where TService : class, IServiceProvider
-           where TServiceImpl : class, IServiceProvider, TService
+           where TService : class, IServicesProvider
+           where TServiceImpl : class, IServicesProvider, TService
            where TUnitOfWork : IUnitOfWork
         {
             services.AddScoped<TServiceImpl>();
