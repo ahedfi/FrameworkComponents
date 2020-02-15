@@ -38,6 +38,28 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
             }
         }
 
+        private async Task<T> InvokeInternal<T>(MethodInfo targetMethod, object[] args)
+        {
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
+                    if (obj is Task<T> resultTask)
+                    {
+                       var result = await resultTask;
+                        scope.Complete();
+                        return result;
+                    }
+                    throw new InvalidOperationException("Invalid async method");
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
         public override object Invoke(MethodInfo targetMethod, object[] args)
         {
             InvokeInternal(targetMethod, args).Wait();
@@ -58,8 +80,7 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
 
         public override async Task<T> InvokeAsyncT<T>(MethodInfo method, object[] args)
         {
-            await InvokeInternal(method, args);
-            return await Task.FromResult(default(T));
+            return await InvokeInternal<T>(method, args);
         }
     }
 }

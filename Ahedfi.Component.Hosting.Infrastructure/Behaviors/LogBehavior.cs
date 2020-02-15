@@ -63,6 +63,34 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
                 throw ex.InnerException ?? ex;
             }
         }
+
+        private async Task<T> InvokeInternal<T>(MethodInfo targetMethod, object[] args)
+        {
+            try
+            {
+                var startTime = DateTime.Now;
+                WriteLog($"Invoking method {targetMethod.Name} at {startTime.ToLongTimeString()}");
+
+                var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
+
+                var endTime = DateTime.Now;
+                var timeSpan = endTime - startTime;
+
+                if (obj is Task<T> resultTask)
+                {
+                   var result = await resultTask;
+                    WriteLog($"Method {targetMethod.Name} at {endTime.ToLongTimeString()}.  Elapsed Time: {timeSpan.TotalMilliseconds} ms");
+                    return result;
+                }
+
+                throw new InvalidOperationException("Invalid async method");
+            }
+            catch (Exception ex)
+            {
+                LogException(ex.InnerException ?? ex, targetMethod);
+                throw ex.InnerException ?? ex;
+            }
+        }
         public override object Invoke(MethodInfo targetMethod, object[] args)
         {
             InvokeInternal(targetMethod, args).Wait();
@@ -83,8 +111,7 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
 
         public override async Task<T> InvokeAsyncT<T>(MethodInfo method, object[] args)
         {
-            await InvokeInternal(method, args);
-            return await Task.FromResult(default(T));
+            return await InvokeInternal<T>(method, args);
         }
     }
 }
