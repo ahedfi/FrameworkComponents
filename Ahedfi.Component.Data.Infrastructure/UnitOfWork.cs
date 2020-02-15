@@ -18,6 +18,7 @@ namespace Ahedfi.Component.Data.Infrastructure
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
         public TContext DbContext => _context;
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : Entity, IAggregateRoot

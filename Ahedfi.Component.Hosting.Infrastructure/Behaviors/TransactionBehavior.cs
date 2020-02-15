@@ -1,20 +1,18 @@
-﻿using Ahedfi.Component.Data.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Ahedfi.Component.Data.Infrastructure.Behaviors
+namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
 {
     public class TransactionBehavior<T> : DispatchProxyAsync
     {
         private T _impl;
-        private IUnitOfWork _unitOfWork;
-        public void SetParameters(T decorated, IUnitOfWork unitOfWork)
+        public void SetParameters(T decorated)
         {
             _impl = decorated;
-            _unitOfWork = unitOfWork;
         }
         private async Task InvokeInternal(MethodInfo targetMethod, object[] args)
         {
@@ -23,21 +21,13 @@ namespace Ahedfi.Component.Data.Infrastructure.Behaviors
                 try
                 {
                     var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
-                    if (obj is Task)
+                    if (obj is Task resultTask)
                     {
-                        var task = (Task) obj;
-                        await task;
-                        if (task.Exception != null)
-                            throw new InvalidOperationException("Invalid operation", task.Exception);
-                        else
-                        {
-                            await _unitOfWork.CommitAsync();
-                            scope.Complete();
-                        }
+                        await resultTask;
+                        scope.Complete();
                     }
                     else
                     {
-                        await _unitOfWork.CommitAsync();
                         scope.Complete();
                     }
                 }
@@ -47,16 +37,17 @@ namespace Ahedfi.Component.Data.Infrastructure.Behaviors
                 }
             }
         }
+
         public override object Invoke(MethodInfo targetMethod, object[] args)
         {
             InvokeInternal(targetMethod, args).Wait();
             return new object();
         }
 
-        public static T Create(T decorated, IUnitOfWork unitOfWork)
+        public static T Create(T decorated)
         {
             object proxy = Create<T, TransactionBehavior<T>>();
-            ((TransactionBehavior<T>)proxy).SetParameters(decorated, unitOfWork);
+            ((TransactionBehavior<T>)proxy).SetParameters(decorated);
             return (T)proxy;
         }
 
@@ -67,7 +58,7 @@ namespace Ahedfi.Component.Data.Infrastructure.Behaviors
 
         public override async Task<T> InvokeAsyncT<T>(MethodInfo method, object[] args)
         {
-             await InvokeInternal(method, args);
+            await InvokeInternal(method, args);
             return await Task.FromResult(default(T));
         }
     }
