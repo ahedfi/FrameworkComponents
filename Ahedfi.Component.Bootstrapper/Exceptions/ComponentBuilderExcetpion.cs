@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ahedfi.Component.Builder.Domain.Exceptions
+namespace Ahedfi.Component.Bootstrapper.Domain.Exceptions
 {
     public class BuilderExcetpion : Exception
     {

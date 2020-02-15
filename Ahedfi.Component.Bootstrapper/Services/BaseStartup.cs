@@ -1,4 +1,4 @@
-﻿using Ahedfi.Component.Builder.Domain.Exceptions;
+﻿using Ahedfi.Component.Bootstrapper.Domain.Exceptions;
 using Ahedfi.Component.Hosting.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Ahedfi.Component.Builder.Domain.Services
+namespace Ahedfi.Component.Bootstrapper.Domain.Services
 {
     public class BaseStartup
     {
@@ -30,6 +30,7 @@ namespace Ahedfi.Component.Builder.Domain.Services
             var modules = GetModulesExceptCoreModule(baseModule, coreModule);
             foreach (var module in modules)
                 RegisterModule(services, module);
+
         }
         private Type GetCoreModuleType(Type type)
         {

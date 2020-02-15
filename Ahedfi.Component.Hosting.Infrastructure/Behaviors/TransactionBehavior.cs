@@ -31,7 +31,7 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
                         scope.Complete();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
