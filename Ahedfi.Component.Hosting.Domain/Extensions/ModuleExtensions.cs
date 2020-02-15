@@ -12,9 +12,9 @@ namespace Ahedfi.Component.Hosting.Domain.Extensions
            where TServiceImpl : class, IServicesProvider, TService
            where TUnitOfWork : IUnitOfWork
         {
-            services.AddScoped<TServiceImpl>();
+            services.AddScoped<TService,TServiceImpl>();
             services.AddScoped<TService>(service => TransactionBehavior<TService>.Create(
-                service.GetService<TServiceImpl>(),
+                service.GetService<TService>(),
                 service.GetService<TUnitOfWork>()));
             return services;
         }

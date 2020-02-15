@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Ahedfi.Component.Services.Domain\Ahedfi.Component.Services.Domain.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
 </Project>
