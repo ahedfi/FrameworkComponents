@@ -22,7 +22,9 @@ namespace Ahedfi.Component.Builder.Domain.Services
         {
             var baseModule = typeof(IBaseModule);
             LoadModuleAssemblies();
-            // Register core module first
+            // TODO : Refactoring registration 
+            var boostrapperModule = GetBootstrapperModuleType(baseModule);
+            RegisterModule(services, boostrapperModule);
             var coreModule = GetCoreModuleType(baseModule);
             RegisterModule(services, coreModule);
             var modules = GetModulesExceptCoreModule(baseModule, coreModule);
@@ -52,6 +54,30 @@ namespace Ahedfi.Component.Builder.Domain.Services
                 throw new BuilderExcetpion(e.Message);
             }
         }
+
+        private Type GetBootstrapperModuleType(Type type)
+        {
+            try
+            {
+                return AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(a => a.GetTypes())
+                        .Where(a => type.IsAssignableFrom(a) && a.FullName.ToLower().Contains("bootstrapper")
+                                    && ((int)a.GetProperty(nameof(IBaseModule.Order)).GetValue(Activator.CreateInstance(a), null)) == -1)
+                        .Single();
+            }
+            catch (ArgumentNullException)
+            {
+                throw new BuilderExcetpion("module assemblies should not be null");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new BuilderExcetpion("module assemblies contains more than one core module");
+            }
+            catch (Exception e)
+            {
+                throw new BuilderExcetpion(e.Message);
+            }
+        }
         private IEnumerable<Type> GetModulesExceptCoreModule(Type type, Type coreModule)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
@@ -60,6 +86,8 @@ namespace Ahedfi.Component.Builder.Domain.Services
         }
         private void LoadModuleAssemblies()
         {
+            //Load Bootstrapper module 
+            Assembly.LoadFrom(@"..\Libs\Ahedfi.Component.Bootstrapper.dll"); // TODO : Avoid hard code
             var moduleAssemblies = Configuration.GetSection("Modules").Get<IEnumerable<string>>();
             foreach (var item in moduleAssemblies)
             {

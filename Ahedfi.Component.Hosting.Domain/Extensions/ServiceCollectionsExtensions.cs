@@ -73,7 +73,6 @@ namespace Ahedfi.Component.Hosting.Domain.Extensions
                 services.Remove(descriptor);
                 services.Add(decorated);
             }
-
             return services;
         }
      
@@ -88,9 +87,7 @@ namespace Ahedfi.Component.Hosting.Domain.Extensions
             {
                 return descriptor.ImplementationFactory(services);
             }
-
             return ActivatorUtilities.GetServiceOrCreateInstance(services, descriptor.ImplementationType);
         }
-
     }
 }
