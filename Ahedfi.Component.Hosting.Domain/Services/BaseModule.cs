@@ -7,9 +7,6 @@ namespace Ahedfi.Component.Hosting.Domain.Services
     public abstract class BaseModule : IBaseModule
     {
         public virtual int Order { get; }
-        public virtual void RegisterTypes(IConfiguration configuration, IServiceCollection services)
-        {
-            
-        }
+        public abstract void RegisterTypes(IConfiguration configuration, IServiceCollection services);
     }
 }
