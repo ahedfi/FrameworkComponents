@@ -7,11 +7,6 @@ namespace Ahedfi.Component.Security.Domain.Entities
 {
     public class UserIdentity : IUserIdentity
     {
-        public string UserName { get; private set; }
-
-        public UserIdentity(string username)
-        {
-            UserName = username;
-        }
+        public string UserName { get; set; }
     }
 }

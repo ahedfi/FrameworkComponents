@@ -33,11 +33,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Bootstrapp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Communication", "Communication", "{8FF802D8-CF22-43C2-AA50-2CCA8D82AD57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Communication.Domain", "Ahedfi.Component.Communication.Domain\Ahedfi.Component.Communication.Domain.csproj", "{38CBA8E3-8196-433C-9672-09CEC997B8BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Communication.Domain", "Ahedfi.Component.Communication.Domain\Ahedfi.Component.Communication.Domain.csproj", "{38CBA8E3-8196-433C-9672-09CEC997B8BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{A05B0CE0-196D-4A28-8881-B41A77FCD0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Security.Domain", "Ahedfi.Component.Security.Domain\Ahedfi.Component.Security.Domain.csproj", "{608C7946-A137-446E-B37A-96157EE97011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ahedfi.Component.Security.Domain", "Ahedfi.Component.Security.Domain\Ahedfi.Component.Security.Domain.csproj", "{608C7946-A137-446E-B37A-96157EE97011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ahedfi.Component.Hosting.WebApi.Domain", "Ahedfi.Component.Hosting.WebApi.Domain\Ahedfi.Component.Hosting.WebApi.Domain.csproj", "{FAC2143A-7969-42AE-ACB9-24B535B30F49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{608C7946-A137-446E-B37A-96157EE97011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{608C7946-A137-446E-B37A-96157EE97011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{608C7946-A137-446E-B37A-96157EE97011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC2143A-7969-42AE-ACB9-24B535B30F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC2143A-7969-42AE-ACB9-24B535B30F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC2143A-7969-42AE-ACB9-24B535B30F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC2143A-7969-42AE-ACB9-24B535B30F49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{38CBA8E3-8196-433C-9672-09CEC997B8BC} = {8FF802D8-CF22-43C2-AA50-2CCA8D82AD57}
 		{A05B0CE0-196D-4A28-8881-B41A77FCD0E7} = {E6D1396D-6791-40F6-AB4C-684FA840D27D}
 		{608C7946-A137-446E-B37A-96157EE97011} = {A05B0CE0-196D-4A28-8881-B41A77FCD0E7}
+		{FAC2143A-7969-42AE-ACB9-24B535B30F49} = {AB9BA6C4-03DC-4709-ABA0-F75CBD2C1B83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {513853A6-E410-45B4-9E0E-C701D24889BA}
