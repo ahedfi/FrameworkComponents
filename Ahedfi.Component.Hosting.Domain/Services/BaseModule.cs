@@ -9,6 +9,7 @@ namespace Ahedfi.Component.Hosting.Domain.Services
         public virtual int Order { get; }
         public virtual void RegisterTypes(IConfiguration configuration, IServiceCollection services)
         {
+            
         }
     }
 }

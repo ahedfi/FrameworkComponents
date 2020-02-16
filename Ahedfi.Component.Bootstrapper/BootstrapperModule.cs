@@ -15,6 +15,7 @@ namespace Ahedfi.Component.Bootstrapper
         {
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IServiceLocator, ServiceLocator>();
+            services.AddScoped<IMapEngine, MapEngine>();
         }
     }
 }
