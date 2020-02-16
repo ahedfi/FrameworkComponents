@@ -1,7 +1,5 @@
 ﻿using Ahedfi.Component.Core.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ahedfi.Component.Data.Domain.Interfaces
 {
