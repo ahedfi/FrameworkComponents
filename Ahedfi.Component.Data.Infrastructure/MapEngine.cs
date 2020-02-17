@@ -1,4 +1,4 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;

@@ -1,10 +1,8 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
-using Ahedfi.Component.Core.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Ahedfi.Component.Data.Domain.Services
 {

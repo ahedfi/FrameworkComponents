@@ -1,15 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <OutputPath>..\bin</OutputPath>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Ahedfi.Component.Core.Domain\Ahedfi.Component.Core.Domain.csproj" />
   </ItemGroup>
-  
 </Project>

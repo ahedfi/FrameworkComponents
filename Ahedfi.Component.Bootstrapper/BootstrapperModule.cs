@@ -1,8 +1,8 @@
-﻿using Ahedfi.Component.Data.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.DependencyInjection.Interfaces;
+using Ahedfi.Component.Core.Infrastructre.DependencyInjection;
+using Ahedfi.Component.Data.Domain.Interfaces;
 using Ahedfi.Component.Data.Infrastructure;
 using Ahedfi.Component.Hosting.Domain.Services;
-using Ahedfi.Component.Services.Domain.Inerfaces;
-using Ahedfi.Component.Services.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

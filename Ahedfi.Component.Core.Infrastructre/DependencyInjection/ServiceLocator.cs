@@ -1,9 +1,8 @@
-﻿using Ahedfi.Component.Services.Domain.Inerfaces;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection.Abstractions;
+﻿using System.Collections.Generic;
 using System;
+using Ahedfi.Component.Core.Domain.DependencyInjection.Interfaces;
 
-namespace Ahedfi.Component.Services.Infrastructure
+namespace Ahedfi.Component.Core.Infrastructre.DependencyInjection
 {
     public class ServiceLocator : IServiceLocator
     {

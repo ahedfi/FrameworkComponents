@@ -1,7 +1,4 @@
-﻿using Ahedfi.Component.Security.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ahedfi.Component.Core.Domain.Security.Interfaces;
 
 namespace Ahedfi.Component.Security.Domain.Entities
 {

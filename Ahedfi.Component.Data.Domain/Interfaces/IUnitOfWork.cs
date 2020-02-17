@@ -1,8 +1,6 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
-using Ahedfi.Component.Core.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
+using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ahedfi.Component.Data.Domain.Interfaces

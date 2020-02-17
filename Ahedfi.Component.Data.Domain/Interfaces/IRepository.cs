@@ -1,5 +1,5 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
-using Ahedfi.Component.Core.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
+using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;

@@ -1,8 +1,5 @@
-﻿using Ahedfi.Component.Security.Domain.Entities;
-using Ahedfi.Component.Security.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Security.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Ahedfi.Component.Communication.Domain.Entities

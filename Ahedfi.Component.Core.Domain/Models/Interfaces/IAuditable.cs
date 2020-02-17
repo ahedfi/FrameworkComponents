@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ahedfi.Component.Core.Domain.Interfaces
+namespace Ahedfi.Component.Core.Domain.Models.Interfaces
 {
     public interface IAuditable
     {

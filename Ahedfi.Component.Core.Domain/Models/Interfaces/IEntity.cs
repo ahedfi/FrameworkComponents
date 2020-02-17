@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ahedfi.Component.Core.Domain.Interfaces
+﻿namespace Ahedfi.Component.Core.Domain.Models.Interfaces
 {
     public interface IEntity
     { }

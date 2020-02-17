@@ -1,4 +1,4 @@
-﻿using Ahedfi.Component.Services.Domain.Inerfaces;
+﻿using Ahedfi.Component.Core.Domain.DependencyInjection.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ahedfi.Component.Hosting.WebApi.Domain.Entities

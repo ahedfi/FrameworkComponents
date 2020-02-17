@@ -1,5 +1,5 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
-using Ahedfi.Component.Core.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
+using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ahedfi.Component.Data.Infrastructure

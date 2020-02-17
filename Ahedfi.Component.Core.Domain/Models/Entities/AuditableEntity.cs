@@ -1,7 +1,7 @@
-﻿using Ahedfi.Component.Core.Domain.Interfaces;
+﻿using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using System;
 
-namespace Ahedfi.Component.Core.Domain.Entities
+namespace Ahedfi.Component.Core.Domain.Models.Entities
 {
     public class AuditableEntity<Tkey> : BaseEntity<Tkey>, IAuditable where Tkey : struct
     {

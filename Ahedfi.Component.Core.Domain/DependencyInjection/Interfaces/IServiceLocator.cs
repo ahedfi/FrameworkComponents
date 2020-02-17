@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ahedfi.Component.Services.Domain.Inerfaces
+namespace Ahedfi.Component.Core.Domain.DependencyInjection.Interfaces
 {
     public interface IServiceLocator : IServiceProvider
     {

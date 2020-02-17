@@ -1,4 +1,4 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
 using System.Collections.Generic;
 
 namespace Ahedfi.Component.Data.Domain.Interfaces

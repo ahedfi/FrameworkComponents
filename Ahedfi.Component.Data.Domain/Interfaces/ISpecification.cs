@@ -1,4 +1,4 @@
-﻿using Ahedfi.Component.Core.Domain.Entities;
+﻿using Ahedfi.Component.Core.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

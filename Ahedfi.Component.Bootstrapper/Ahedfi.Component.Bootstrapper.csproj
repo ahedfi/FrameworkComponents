@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ahedfi.Component.Core.Infrastructre\Ahedfi.Component.Core.Infrastructre.csproj" />
     <ProjectReference Include="..\Ahedfi.Component.Data.Infrastructure\Ahedfi.Component.Data.Infrastructure.csproj" />
     <ProjectReference Include="..\Ahedfi.Component.Hosting.Domain\Ahedfi.Component.Hosting.Domain.csproj" />
-    <ProjectReference Include="..\Ahedfi.Component.Services.Infrastructure\Ahedfi.Component.Services.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

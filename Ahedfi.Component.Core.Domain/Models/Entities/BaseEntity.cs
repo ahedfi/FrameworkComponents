@@ -1,9 +1,6 @@
-﻿using Ahedfi.Component.Core.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ahedfi.Component.Core.Domain.Models.Interfaces;
 
-namespace Ahedfi.Component.Core.Domain.Entities
+namespace Ahedfi.Component.Core.Domain.Models.Entities
 {
     public class BaseEntity<Tkey> : Entity, IEntity<Tkey>, IDeleted where Tkey : struct
     {
