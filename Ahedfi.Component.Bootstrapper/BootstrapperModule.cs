@@ -1,5 +1,7 @@
 ﻿using Ahedfi.Component.Core.Domain.DependencyInjection.Interfaces;
+using Ahedfi.Component.Core.Domain.Validation.interfaces;
 using Ahedfi.Component.Core.Infrastructre.DependencyInjection;
+using Ahedfi.Component.Core.Infrastructre.Validation;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Ahedfi.Component.Data.Infrastructure;
 using Ahedfi.Component.Hosting.Domain.Services;
@@ -16,6 +18,7 @@ namespace Ahedfi.Component.Bootstrapper
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IServiceLocator, ServiceLocator>();
             services.AddScoped<IMapEngine, MapEngine>();
+            services.AddSingleton<IRequestValidator>(provider => new RequestValidator(services, provider));
         }
     }
 }

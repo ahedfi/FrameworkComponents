@@ -1,4 +1,4 @@
-﻿namespace Ahedfi.Component.Hosting.Domain.Interfaces
+﻿namespace Ahedfi.Component.Core.Domain.Validation.interfaces
 {
     public interface IRequestValidator : IModelValidator
     {

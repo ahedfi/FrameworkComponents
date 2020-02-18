@@ -1,5 +1,7 @@
 ﻿using Ahedfi.Component.Bootstrapper.Domain.Exceptions;
+using Ahedfi.Component.Core.Domain.Validation.interfaces;
 using Ahedfi.Component.Hosting.Domain.Interfaces;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,12 +14,10 @@ namespace Ahedfi.Component.Bootstrapper.Domain.Services
     public class BaseStartup
     {
         public IConfiguration Configuration { get; }
-
         public BaseStartup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
         public virtual void ConfigureServices(IServiceCollection services)
         {
             var baseModule = typeof(IBaseModule);
@@ -30,7 +30,6 @@ namespace Ahedfi.Component.Bootstrapper.Domain.Services
             var modules = GetModulesExceptCoreModule(baseModule, coreModule);
             foreach (var module in modules)
                 RegisterModule(services, module);
-
         }
         private Type GetCoreModuleType(Type type)
         {
@@ -55,7 +54,6 @@ namespace Ahedfi.Component.Bootstrapper.Domain.Services
                 throw new BuilderExcetpion(e.Message);
             }
         }
-
         private Type GetBootstrapperModuleType(Type type)
         {
             try
@@ -99,6 +97,7 @@ namespace Ahedfi.Component.Bootstrapper.Domain.Services
         {
             IBaseModule instance = (IBaseModule)Activator.CreateInstance(module);
             instance.RegisterTypes(Configuration, services);
+            instance.RegisterValidator(services.BuildServiceProvider().GetService<IRequestValidator>());
         }
     }
 }
