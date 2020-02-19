@@ -2,7 +2,6 @@
 using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
