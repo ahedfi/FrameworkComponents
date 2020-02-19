@@ -11,13 +11,13 @@ namespace Ahedfi.Component.Data.Domain.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : Entity, IAggregateRoot
     {
-        Task<TEntity> GetFirstOrDefaultAsync(
+        Task<TEntity> FirstOrDefaultAsync(
             Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
             bool disableTracking = true
         );
-        Task<IReadOnlyList<TEntity>> GetListAsync(
+        Task<IReadOnlyList<TEntity>> ListAsync(
             Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,

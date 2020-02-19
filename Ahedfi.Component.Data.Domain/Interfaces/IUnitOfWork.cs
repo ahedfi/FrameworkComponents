@@ -8,6 +8,6 @@ namespace Ahedfi.Component.Data.Domain.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<TEntity> Repository<TEntity>() where TEntity : Entity, IAggregateRoot;
-        Task CommitAsync();
+        Task CommitAsync(string username);
     }
 }

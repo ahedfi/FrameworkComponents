@@ -18,7 +18,7 @@ namespace Ahedfi.Component.Data.Infrastructure
         {
             _dbContext = dbContext;
         }
-        public virtual async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,   
+        public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,   
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
             bool disableTracking = true)
@@ -48,7 +48,7 @@ namespace Ahedfi.Component.Data.Infrastructure
                 return await query.FirstOrDefaultAsync();
             }
         }
-        public virtual async Task<IReadOnlyList<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null, 
+        public virtual async Task<IReadOnlyList<TEntity>> ListAsync(Expression<Func<TEntity, bool>> predicate = null, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, 
             IIncludableQueryable<TEntity, object>> include = null,
             bool disableTracking = true)

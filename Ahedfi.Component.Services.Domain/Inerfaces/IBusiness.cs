@@ -3,15 +3,16 @@ using Ahedfi.Component.Core.Domain.Security.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Ahedfi.Component.Services.Domain.Inerfaces
 {
-    public interface IBusiness<T> where T : IEntity
+    public interface IBusiness<TEntity> where TEntity : IEntity, IAggregateRoot
     {
-        T Save(IUserIdentity user, T Entity);
-        bool Delete(IUserIdentity user, T Entity);
-        T FindFirstOrDefault(Expression<Func<T, bool>> predicate);
-        IEnumerable<T> Filter(Expression<Func<T, bool>> predicate);
-        IEnumerable<T> FindAll();
+        Task<TEntity> SaveAsync(string username, TEntity Entity);
+        Task DeleteAsync(IUserIdentity user, TEntity Entity);
+        Task<TEntity> FindFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FilterAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FindAllAsync();
     }
 }

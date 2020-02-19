@@ -2,8 +2,10 @@
 using Ahedfi.Component.Core.Domain.Models.Interfaces;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ahedfi.Component.Data.Infrastructure
@@ -37,8 +39,27 @@ namespace Ahedfi.Component.Data.Infrastructure
             return (IRepository<TEntity>)_repositories[type];
         }
 
-        public async Task CommitAsync()
+        public async Task CommitAsync(string username)
         {
+            var entries = _context.ChangeTracker
+                                .Entries()
+                                .Where(e => e.Entity is IAuditable && (
+                                        e.State == EntityState.Added
+                                        || e.State == EntityState.Modified || e.State == EntityState.Deleted));
+
+            foreach (var entityEntry in entries)
+            {
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((IAuditable)entityEntry.Entity).CreatedOn = DateTime.Now;
+                    ((IAuditable)entityEntry.Entity).CreatedBy = username;
+                }
+                else
+                {
+                    ((IAuditable)entityEntry.Entity).UpdatedOn = DateTime.Now;
+                    ((IAuditable)entityEntry.Entity).UpdatedBy = username;
+                }
+            }
             await _context.SaveChangesAsync();
         }
 

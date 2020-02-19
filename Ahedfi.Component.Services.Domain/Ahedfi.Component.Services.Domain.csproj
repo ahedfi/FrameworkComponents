@@ -10,6 +10,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Ahedfi.Component.Core.Domain\Ahedfi.Component.Core.Domain.csproj" />
+    <ProjectReference Include="..\Ahedfi.Component.Data.Domain\Ahedfi.Component.Data.Domain.csproj" />
   </ItemGroup>
   
 </Project>

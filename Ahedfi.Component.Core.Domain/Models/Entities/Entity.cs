@@ -2,8 +2,7 @@
 
 namespace Ahedfi.Component.Core.Domain.Models.Entities
 {
-    public class Entity : IEntity
+    public abstract class Entity : IEntity
     {
-
     }
 }
