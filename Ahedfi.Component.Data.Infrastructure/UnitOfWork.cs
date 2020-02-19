@@ -49,15 +49,18 @@ namespace Ahedfi.Component.Data.Infrastructure
 
             foreach (var entityEntry in entries)
             {
-                if (entityEntry.State == EntityState.Added)
+                if (entityEntry is IAuditable)
                 {
-                    ((IAuditable)entityEntry.Entity).CreatedOn = DateTime.Now;
-                    ((IAuditable)entityEntry.Entity).CreatedBy = username;
-                }
-                else
-                {
-                    ((IAuditable)entityEntry.Entity).UpdatedOn = DateTime.Now;
-                    ((IAuditable)entityEntry.Entity).UpdatedBy = username;
+                    if (entityEntry.State == EntityState.Added)
+                    {
+                        ((IAuditable)entityEntry.Entity).CreatedOn = DateTime.Now;
+                        ((IAuditable)entityEntry.Entity).CreatedBy = username;
+                    }
+                    else
+                    {
+                        ((IAuditable)entityEntry.Entity).UpdatedOn = DateTime.Now;
+                        ((IAuditable)entityEntry.Entity).UpdatedBy = username;
+                    }
                 }
             }
             await _context.SaveChangesAsync();
