@@ -21,7 +21,7 @@ namespace Ahedfi.Component.Data.Infrastructure
         public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,   
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
-            bool disableTracking = true)
+            bool disableTracking = false)
         {
             IQueryable<TEntity> query = _dbContext.Set<TEntity>();
             if (disableTracking)
