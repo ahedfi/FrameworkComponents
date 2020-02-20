@@ -42,49 +42,72 @@ namespace Ahedfi.Component.Data.Infrastructure
 
         public async Task CommitAsync(string username)
         {
-            var entries = _context.ChangeTracker
-                                .Entries()
-                                .Where(e => e.Entity is IAuditable && (e.State == EntityState.Added
-                                        || e.State == EntityState.Modified || e.State == EntityState.Deleted));
-
-            foreach (var entityEntry in entries.ToList())
-            {
-                Audit(entityEntry, username);
-
-                if (entityEntry.Entity is IAuditable)
-                {
-                    if (entityEntry.State == EntityState.Added)
-                    {
-                        ((IAuditable)entityEntry.Entity).CreatedOn = DateTime.Now;
-                        ((IAuditable)entityEntry.Entity).CreatedBy = username;
-                    }
-                    else
-                    {
-                        ((IAuditable)entityEntry.Entity).UpdatedOn = DateTime.Now;
-                        ((IAuditable)entityEntry.Entity).UpdatedBy = username;
-                    }
-                }
-            }
-
+            TrackEntities(username);
             await _context.SaveChangesAsync();
         }
-        private void Audit(EntityEntry entry, string username)
+
+        private void TrackEntities(string username)
+        {
+            var entries = GetEntitiesState();
+            var batchId = Guid.NewGuid();
+            foreach (var entityEntry in entries.ToList())
+            {
+                AddToAuditTrails(entityEntry, username, batchId);
+                SetAudit(username, entityEntry);
+            }
+        }
+        private IEnumerable<EntityEntry> GetEntitiesState()
+        {
+            return _context.ChangeTracker
+                                .Entries()
+                                .Where(e => e.Entity is IAuditable &&
+                                            (e.State == EntityState.Added ||
+                                            e.State == EntityState.Modified ||
+                                            e.State == EntityState.Deleted)
+                                       );
+        }
+
+        private void AddToAuditTrails(EntityEntry entry, string username, Guid guid)
         {
             foreach (var property in entry.Properties)
             {
+                if (property.OriginalValue == property.CurrentValue)
+                    continue;
+
                 var auditEntry = new AuditTrail
                 {
-                    Table = entry.Entity.GetType().Name,
-                    Column = property.Metadata.Name,
-                    OldValue = !property.IsTemporary ? ((property.IsModified) ? property.OriginalValue?.ToString() : string.Empty) : string.Empty,
-                    NewValue = !property.IsTemporary ? property.CurrentValue?.ToString() : string.Empty,
+                    ObjectName = entry.Entity.GetType().Name,
+                    ObjectId = ((dynamic)entry.Entity).Id.ToString(),
+                    PropertyName = property.Metadata.Name,
+                    OldValue = property.OriginalValue != null ? property.OriginalValue.ToString() : string.Empty,
+                    NewValue = property.CurrentValue != null ? property.CurrentValue.ToString() : string.Empty,
                     Date = DateTime.Now,
-                    UserName = username
+                    UserName = username,
+                    ChangeType = entry.State.ToString(),
+                    BatchId = guid
                 };
                 Repository<AuditTrail>().AddAsync(auditEntry);
             }
         }
+        private void SetAudit(string username, EntityEntry entityEntry)
+        {
+            if (entityEntry.Entity is IAuditable)
+            {
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((IAuditable)entityEntry.Entity).CreatedOn = DateTime.Now;
+                    ((IAuditable)entityEntry.Entity).CreatedBy = username;
+                }
+                else
+                {
+                    ((IAuditable)entityEntry.Entity).UpdatedOn = DateTime.Now;
+                    ((IAuditable)entityEntry.Entity).UpdatedBy = username;
+                }
+            }
+        }
 
+       
+      
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
