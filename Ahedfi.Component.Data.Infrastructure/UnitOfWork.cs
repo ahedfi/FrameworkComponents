@@ -1,7 +1,9 @@
 ﻿using Ahedfi.Component.Core.Domain.Models.Entities;
 using Ahedfi.Component.Core.Domain.Models.Interfaces;
+using Ahedfi.Component.Data.Domain.Entities;
 using Ahedfi.Component.Data.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,13 +44,14 @@ namespace Ahedfi.Component.Data.Infrastructure
         {
             var entries = _context.ChangeTracker
                                 .Entries()
-                                .Where(e => e.Entity is IAuditable && (
-                                        e.State == EntityState.Added
+                                .Where(e => e.Entity is IAuditable && (e.State == EntityState.Added
                                         || e.State == EntityState.Modified || e.State == EntityState.Deleted));
 
-            foreach (var entityEntry in entries)
+            foreach (var entityEntry in entries.ToList())
             {
-                if (entityEntry is IAuditable)
+                Audit(entityEntry, username);
+
+                if (entityEntry.Entity is IAuditable)
                 {
                     if (entityEntry.State == EntityState.Added)
                     {
@@ -64,6 +67,22 @@ namespace Ahedfi.Component.Data.Infrastructure
             }
 
             await _context.SaveChangesAsync();
+        }
+        private void Audit(EntityEntry entry, string username)
+        {
+            foreach (var property in entry.Properties)
+            {
+                var auditEntry = new AuditTrail
+                {
+                    Table = entry.Entity.GetType().Name,
+                    Column = property.Metadata.Name,
+                    OldValue = !property.IsTemporary ? ((property.IsModified) ? property.OriginalValue?.ToString() : string.Empty) : string.Empty,
+                    NewValue = !property.IsTemporary ? property.CurrentValue?.ToString() : string.Empty,
+                    Date = DateTime.Now,
+                    UserName = username
+                };
+                Repository<AuditTrail>().AddAsync(auditEntry);
+            }
         }
 
         protected virtual void Dispose(bool disposing)
