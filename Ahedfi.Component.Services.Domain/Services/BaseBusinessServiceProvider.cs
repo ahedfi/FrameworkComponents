@@ -22,10 +22,10 @@ namespace Ahedfi.Component.Services.Domain.Services
         {
             Mapper = mapper;
         }
-        public async Task DeleteAsync(IUserIdentity user, TEntity entity)
+        public async Task DeleteAsync(string username, TEntity entity)
         {
-            _unitOfWork.Repository<TEntity>().Delete(entity);
-           await _unitOfWork.CommitAsync(user.UserName);
+            ((IDeleted)entity).IsDeleted = true;
+            await SaveAsync(username, entity);
         }
 
         public async Task<IEnumerable<TEntity>> FilterAsync(Expression<Func<TEntity, bool>> predicate)

@@ -10,7 +10,7 @@ namespace Ahedfi.Component.Services.Domain.Inerfaces
     public interface IBusiness<TEntity> where TEntity : IEntity, IAggregateRoot
     {
         Task<TEntity> SaveAsync(string username, TEntity Entity);
-        Task DeleteAsync(IUserIdentity user, TEntity Entity);
+        Task DeleteAsync(string username, TEntity Entity);
         Task<TEntity> FindFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> FilterAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> FindAllAsync();
