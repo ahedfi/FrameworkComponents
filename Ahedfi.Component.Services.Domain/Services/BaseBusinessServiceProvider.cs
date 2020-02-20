@@ -22,10 +22,10 @@ namespace Ahedfi.Component.Services.Domain.Services
         {
             Mapper = mapper;
         }
-        public async Task DeleteAsync(string username, TEntity entity)
+        public async Task DeleteAsync(IUserIdentity user, TEntity entity)
         {
             ((IDeleted)entity).IsDeleted = true;
-            await SaveAsync(username, entity);
+            await SaveAsync(user, entity);
         }
 
         public async Task<IEnumerable<TEntity>> FilterAsync(Expression<Func<TEntity, bool>> predicate)
@@ -43,7 +43,7 @@ namespace Ahedfi.Component.Services.Domain.Services
             return await _unitOfWork.Repository<TEntity>().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<TEntity> SaveAsync(string username, TEntity entity)
+        public async Task<TEntity> SaveAsync(IUserIdentity user, TEntity entity)
         {
             if (entity.IsTransient)
             {
@@ -53,7 +53,7 @@ namespace Ahedfi.Component.Services.Domain.Services
             {
                 _unitOfWork.Repository<TEntity>().Update(entity);
             }
-            await _unitOfWork.CommitAsync(username);
+            await _unitOfWork.CommitAsync(user.UserName);
 
             return entity;
         }
