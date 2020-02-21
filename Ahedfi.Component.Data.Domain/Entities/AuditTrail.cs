@@ -13,7 +13,6 @@ namespace Ahedfi.Component.Data.Domain.Entities
         public string ObjectName { get; set; }
         public string ObjectId { get; set; }
         public string PropertyName { get; set; }
-        public string PropertyType { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public string ChangeType { get; set; }
