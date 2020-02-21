@@ -45,8 +45,7 @@ namespace Ahedfi.Component.Data.Infrastructure
                         Date = DateTime.Now,
                         UserName = username,
                         ChangeType = entry.State.ToString(),
-                        BatchId = guid,
-                        PropertyType = property.GetType().ToString()
+                        BatchId = guid
                     };
 
                     audits.Add(auditEntry);
@@ -69,8 +68,7 @@ namespace Ahedfi.Component.Data.Infrastructure
                         Date = DateTime.Now,
                         UserName = username,
                         ChangeType = entry.State.ToString(),
-                        BatchId = guid,
-                        PropertyType = property.GetType().ToString()
+                        BatchId = guid
                     };
 
                     audits.Add(auditEntry);
@@ -91,8 +89,7 @@ namespace Ahedfi.Component.Data.Infrastructure
                         UserName = username,
 
                         ChangeType = entry.State.ToString(),
-                        BatchId = guid,
-                        PropertyType = property.GetType().ToString()
+                        BatchId = guid
                     };
                     audits.Add(auditEntry);
                 }
