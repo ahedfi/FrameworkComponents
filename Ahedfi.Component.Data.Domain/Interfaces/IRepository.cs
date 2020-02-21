@@ -15,13 +15,13 @@ namespace Ahedfi.Component.Data.Domain.Interfaces
             Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
-            bool disableTracking = true
+            bool disableTracking = false
         );
         Task<IReadOnlyList<TEntity>> ListAsync(
             Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
-            bool disableTracking = true
+            bool disableTracking = false
         );
         Task<TEntity> GetByIdAsync(int id);
         Task<IReadOnlyList<TEntity>> ListAllAsync();

@@ -105,7 +105,7 @@ namespace Ahedfi.Component.Data.Infrastructure
         }
         public virtual void Update(TEntity entity)
         {
-             _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
         public virtual void Update(IEnumerable<TEntity> entities)
         {
