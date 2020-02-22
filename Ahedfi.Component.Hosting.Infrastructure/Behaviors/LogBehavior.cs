@@ -1,6 +1,6 @@
 ﻿using Ahedfi.Component.Hosting.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +10,12 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
     public class LogBehavior<T> : DispatchProxyAsync
     {
         private T _impl;
-        public void SetParameters(T decorated)
+        private ILogger<LogBehavior<T>> _logger;
+        public void SetParameters(T decorated, ILogger<LogBehavior<T>> logger)
         {
             _impl = decorated;
+            _logger = logger;
         }
-        private void WriteLog(string message)
-        {
-            Console.WriteLine("Profiler: {0}", message);
-        }
-
         private void LogException(Exception exception, MethodInfo methodInfo = null)
         {
             try
@@ -40,7 +37,7 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
             try
             {
                 var startTime = DateTime.Now;
-                WriteLog($"Invoking method {targetMethod.Name} at {startTime.ToLongTimeString()}");
+                _logger.LogInformation("Invoking method {0} at {1}", targetMethod.Name, startTime.ToLongTimeString());
 
                 var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
 
@@ -50,11 +47,11 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
                 if (obj is Task resultTask)
                 {
                     await resultTask;
-                    WriteLog($"Method {targetMethod.Name} at {endTime.ToLongTimeString()}.  Elapsed Time: {timeSpan.TotalMilliseconds} ms");
+                    _logger.LogInformation("Method {0} at {1}. Elapsed Time: {2} ms", targetMethod.Name, endTime.ToLongTimeString(), timeSpan.TotalMilliseconds);
                 }
                 else
                 {
-                    WriteLog($"Method {targetMethod.Name} at {endTime.ToLongTimeString()}.  Elapsed Time: {timeSpan.TotalMilliseconds} ms");
+                    _logger.LogInformation("Method {0} at {1}. Elapsed Time: {2} ms", targetMethod.Name, endTime.ToLongTimeString(), timeSpan.TotalMilliseconds);
                 }
             }
             catch (Exception ex)
@@ -69,7 +66,7 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
             try
             {
                 var startTime = DateTime.Now;
-                WriteLog($"Invoking method {targetMethod.Name} at {startTime.ToLongTimeString()}");
+                _logger.LogInformation("Invoking method {0} at {1}", targetMethod.Name, startTime.ToLongTimeString());
 
                 var obj = _impl.GetType().GetMethod(targetMethod.Name).Invoke(_impl, args);
 
@@ -78,8 +75,9 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
 
                 if (obj is Task<T> resultTask)
                 {
-                   var result = await resultTask;
-                    WriteLog($"Method {targetMethod.Name} at {endTime.ToLongTimeString()}.  Elapsed Time: {timeSpan.TotalMilliseconds} ms");
+                    var result = await resultTask;
+                    _logger.LogInformation("Method {0} at {1}. Elapsed Time: {2} ms", targetMethod.Name, endTime.ToLongTimeString(), timeSpan.TotalMilliseconds);
+
                     return result;
                 }
 
@@ -97,10 +95,10 @@ namespace Ahedfi.Component.Hosting.Infrastructure.Behaviors
             return new object();
         }
 
-        public static T Create(T decorated)
+        public static T Create(T decorated, ILogger<LogBehavior<T>> logger)
         {
             object proxy = Create<T, LogBehavior<T>>();
-            ((LogBehavior<T>)proxy).SetParameters(decorated);
+            ((LogBehavior<T>)proxy).SetParameters(decorated, logger);
             return (T)proxy;
         }
 
